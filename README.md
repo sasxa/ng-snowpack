@@ -2,26 +2,43 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
-## Development server
+## Initialize project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+npx @angular/cli new ng-snowpack --skip-install
+```
 
-## Code scaffolding
+## Add script commands
+```
+package.json > scripts
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    "postinstall": "ngcc && snowpack",
+    "snowpack": "snowpack",
+    "ngc": "ngc --outDir ./dist/out-ngc",
+    "tsc": "tsc",
+    "clean": "rm -rf dist build",
+    "reset": "rm -rf dist build web_modules node_modules yarn.lock",
+```
 
-## Build
+## Install dependencies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+yarn
+```
 
-## Running unit tests
+## Execute script commands
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`yarn build`
+- build app for production with Angular cli into `/dist/ng-snowpack`
 
-## Running end-to-end tests
+`yarn tsc`
+- compile code with typescript compiler cli into `/dist/out-tsc`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`yarn ngc`
+- compile code with Angular's compiler cli into `/dist/out-ngc`
 
-## Further help
+`yarn snowpack build`
+- compile code with snowpack into `/build/_dist_/`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+`yarn snowpack dev`
+- serve app with snowpack
